@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
-// using sc = System.Console; // alias
+using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Client
 {
@@ -9,7 +10,7 @@ namespace PizzaBox.Client
     private static void Main()
     {
       List<string> storeList = new List<string> { "Store 001", "Store 002" }; // explicit
-      var stores = new List<Store> { new Store(), new Store() }; // datatype inference
+      var stores = new List<AStore> { new ChicagoStore(), new NewYorkStore() }; // datatype inference
 
       for (var x = 0; x < stores.Count; x += 1)
       {

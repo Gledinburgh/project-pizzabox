@@ -1,11 +1,11 @@
 using System;
 
-namespace PizzaBox.Client
+namespace PizzaBox.Domain.Abstracts
 {
-  public class Store
+  public abstract class AStore
   {
     string name;
-    public Store()
+    public AStore()
     {
       name = DateTime.Now.Ticks.ToString();
     }
