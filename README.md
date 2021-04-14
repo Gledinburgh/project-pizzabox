@@ -39,17 +39,16 @@ It is a command line-based application focused on nothing but pizzas.
 
 ## architecture
 
-+ [solution] PizzaBox.sln
-  + [project - console] PizzaBox.Client.csproj
-  + [project - classlib] PizzaBox.Domain.csproj
-    + [folder] Abstracts
-    + [folder] Interfaces
-    + [folder] Models
-    + [folder] Singletons
+- [solution] PizzaBox.sln
+  - [project - console] PizzaBox.Client.csproj
+  - [project - classlib] PizzaBox.Domain.csproj
+    - [directory] Abstracts
+    - [directory] Models
+    - [directory] Singletons
   + [project - classlib ] PizzaBox.Storing.csproj
-    + [folder] Repositories
+    + [directory] Repositories
   + [project - xunit] PizzaBox.Testing.csproj
-    + [folder] Tests
+    + [directory] Tests
 
 ## requirements
 
@@ -98,7 +97,7 @@ The application is centered around the interaction of 4 main objects:
 - code-freeze on Apr-26 at 11.59p Central
 - presentation on Apr-28 starting at 9.30a Central
 - try to implement as many requirements as you can (don't push to get all done)
-- should be an mvp (minimum viable product) status
+- should be an mvp (minimum viable product) status (20 hours)
   - able to at least place an order with 1 pizza
   - able to at least have 10 total validation unit tests for Customer, Order, Pizza, Store
   - able to save a placed order including customer info, pizza info, store info
