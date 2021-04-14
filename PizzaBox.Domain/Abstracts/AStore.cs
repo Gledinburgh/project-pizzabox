@@ -2,17 +2,14 @@ using System;
 
 namespace PizzaBox.Domain.Abstracts
 {
-  public abstract class AStore
+  public abstract class AStore : Object
   {
-    string name;
-    public AStore()
-    {
-      name = DateTime.Now.Ticks.ToString();
-    }
+    public string Name { get; protected set; }
+
 
     public override string ToString()
     {
-      return name;
+      return Name;
     }
   }
 }
