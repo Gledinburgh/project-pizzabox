@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml.Serialization;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models.Stores;
+using PizzaBox.Storing.Repositories;
 
 namespace PizzaBox.Client.Singletons
 {
@@ -11,6 +12,8 @@ namespace PizzaBox.Client.Singletons
   /// </summary>
   public class StoreSingleton
   {
+    private const string _path = @"store.xml";
+    private readonly FileRepository _fr = new FileRepository();
     private static readonly StoreSingleton _instance;
     public List<AStore> Stores { get; }
 
@@ -29,23 +32,21 @@ namespace PizzaBox.Client.Singletons
 
     private StoreSingleton()
     {
-      Stores = new List<AStore>()
+      if (Stores == null)
       {
-        new ChicagoStore(),
-        new NewYorkStore()
-      };
-    }
+        Stores = _fr.ReadFromFile(_path);
+      }
 
-    public void WriteToFile()
-    {
-      // need file access
-      var path = @"store.xml"; // literal explicit string
-      // open the file
-      var writer = new StreamWriter(path);
-      // convert object to text
-      var xml = new XmlSerializer(typeof(List<AStore>));
-      // write text to file
-      xml.Serialize(writer, Stores);
+      // if (Stores == null)
+      // {
+      //   _fr.WriteToFile(_path, new List<AStore>()
+      //   {
+      //     new ChicagoStore(),
+      //     new NewYorkStore()
+      //   });
+
+      //   Stores = _fr.ReadFromFile(_path);
+      // }
     }
   }
 }

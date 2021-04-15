@@ -41,10 +41,10 @@ It is a command line-based application focused on nothing but pizzas.
 
 - [solution] PizzaBox.sln
   - [project - console] PizzaBox.Client.csproj
+    - [directory] Singletons
   - [project - classlib] PizzaBox.Domain.csproj
     - [directory] Abstracts
     - [directory] Models
-    - [directory] Singletons
   + [project - classlib ] PizzaBox.Storing.csproj
     + [directory] Repositories
   + [project - xunit] PizzaBox.Testing.csproj
