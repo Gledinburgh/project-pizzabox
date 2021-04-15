@@ -20,6 +20,7 @@ namespace PizzaBox.Client
     /// </summary>
     private static void Main()
     {
+      _storeSingleton.WriteToFile();
       Run();
     }
 
