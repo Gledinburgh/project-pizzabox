@@ -45,10 +45,10 @@ It is a command line-based application focused on nothing but pizzas.
   - [project - classlib] PizzaBox.Domain.csproj
     - [directory] Abstracts
     - [directory] Models
-  + [project - classlib ] PizzaBox.Storing.csproj
-    + [directory] Repositories
-  + [project - xunit] PizzaBox.Testing.csproj
-    + [directory] Tests
+  - [project - classlib ] PizzaBox.Storing.csproj
+    - [directory] Repositories
+  - [project - xunit] PizzaBox.Testing.csproj
+    - [directory] Tests
 
 ## requirements
 

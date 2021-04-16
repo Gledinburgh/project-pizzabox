@@ -18,6 +18,9 @@ namespace PizzaBox.Domain.Abstracts
     public Size Size { get; set; }
     public List<Topping> Toppings { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
     protected APizza()
     {
       Factory();
@@ -36,17 +39,17 @@ namespace PizzaBox.Domain.Abstracts
     /// <summary>
     /// 
     /// </summary>
-    protected virtual void AddCrust() { }
+    protected abstract void AddCrust();
 
     /// <summary>
     /// 
     /// </summary>
-    protected virtual void AddSize() { }
+    protected abstract void AddSize();
 
     /// <summary>
     /// 
     /// </summary>
-    protected virtual void AddToppings() { }
+    protected abstract void AddToppings();
 
     /// <summary>
     /// 

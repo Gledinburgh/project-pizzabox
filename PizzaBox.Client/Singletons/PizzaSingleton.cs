@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
-using PizzaBox.Domain.Models.Pizzas;
-using PizzaBox.Domain.Models.Stores;
 using PizzaBox.Storing.Repositories;
 
 namespace PizzaBox.Client.Singletons
@@ -29,6 +27,9 @@ namespace PizzaBox.Client.Singletons
       }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private PizzaSingleton()
     {
       Pizzas = _fileRepository.ReadFromFile<List<APizza>>(_path);
