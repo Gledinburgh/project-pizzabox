@@ -15,15 +15,14 @@ namespace PizzaBox.Storing.Repositories
     /// 
     /// </summary>
     /// <returns></returns>
-    public List<AStore> ReadFromFile(string path)
+    public T ReadFromFile<T>(string path) where T : class
     {
       try
       {
         var reader = new StreamReader(path);
-        var xml = new XmlSerializer(typeof(List<AStore>));
+        var xml = new XmlSerializer(typeof(T));
 
-        return xml.Deserialize(reader) as List<AStore>; // if casting fails, ==> null POCOs, plain old csharp objects
-        //return (List<AStore>)xml.Deserialize(reader); // if casting fails ==> exception
+        return xml.Deserialize(reader) as T;
       }
       catch
       {
@@ -35,12 +34,12 @@ namespace PizzaBox.Storing.Repositories
     /// 
     /// </summary>
     /// <returns></returns>
-    public bool WriteToFile(string path, List<AStore> stores)
+    public bool WriteToFile<T>(string path, List<AStore> stores) where T : class
     {
       try
       {
         var writer = new StreamWriter(path);
-        var xml = new XmlSerializer(typeof(List<AStore>));
+        var xml = new XmlSerializer(typeof(T));
 
         xml.Serialize(writer, stores);
 
@@ -48,7 +47,6 @@ namespace PizzaBox.Storing.Repositories
       }
       catch
       {
-        // throw new Exception("reaiding because reason", e);
         return false;
       }
     }

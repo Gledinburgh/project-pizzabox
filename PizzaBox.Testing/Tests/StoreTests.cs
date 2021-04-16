@@ -59,9 +59,9 @@ namespace PizzaBox.Testing.Tests
     /// <param name="storeName"></param>
     /// <param name="x"></param>
     [Theory]
-    [InlineData("ChicagoStore", 1)]
-    [InlineData("NewYorkStore", 1)]
-    public void Test_StoreNameSimple(string storeName, int x)
+    [InlineData("ChicagoStore")]
+    [InlineData("NewYorkStore")]
+    public void Test_StoreNameSimple(string storeName)
     {
       Assert.NotNull(storeName);
     }

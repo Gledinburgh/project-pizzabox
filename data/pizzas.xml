@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAPizza xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <APizza xsi:type="CustomPizza">
+    <Crust></Crust>
+    <Size></Size>
+    <ArrayOfTopping></ArrayOfTopping>
+  </APizza>
+  <APizza xsi:type="MeatPizza">
+    <Crust></Crust>
+    <Size></Size>
+    <ArrayOfTopping></ArrayOfTopping>
+  </APizza>
+  <APizza xsi:type="VeggiePizza">
+    <Crust></Crust>
+    <Size></Size>
+    <ArrayOfTopping></ArrayOfTopping>
+  </APizza>
+</ArrayOfAPizza>

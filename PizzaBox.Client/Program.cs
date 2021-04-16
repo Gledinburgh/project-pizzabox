@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
 using PizzaBox.Domain.Abstracts;
-using PizzaBox.Domain.Models.Stores;
 using PizzaBox.Domain.Models;
-using PizzaBox.Domain.Models.Pizzas;
 using PizzaBox.Client.Singletons;
 
 namespace PizzaBox.Client
@@ -13,6 +10,7 @@ namespace PizzaBox.Client
   /// </summary>
   public class Program
   {
+    private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
 
     /// <summary>
@@ -53,7 +51,7 @@ namespace PizzaBox.Client
     {
       var index = 0;
 
-      foreach (var item in PizzaSingleton.pizzas)
+      foreach (var item in _pizzaSingleton.Pizzas)
       {
         Console.WriteLine($"{++index} - {item}");
       }
@@ -78,8 +76,14 @@ namespace PizzaBox.Client
     /// <returns></returns>
     private static APizza SelectPizza()
     {
-      var input = int.Parse(Console.ReadLine());
-      var pizza = PizzaSingleton.pizzas[input - 1];
+      var valid = int.TryParse(Console.ReadLine(), out int input);
+
+      if (!valid)
+      {
+        return null;
+      }
+
+      var pizza = _pizzaSingleton.Pizzas[input - 1];
 
       PrintOrder(pizza);
 
@@ -92,7 +96,12 @@ namespace PizzaBox.Client
     /// <returns></returns>
     private static AStore SelectStore()
     {
-      var input = int.Parse(Console.ReadLine());
+      var valid = int.TryParse(Console.ReadLine(), out int input);
+
+      if (!valid)
+      {
+        return null;
+      }
 
       PrintPizzaList();
 
