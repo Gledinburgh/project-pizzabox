@@ -133,12 +133,34 @@ namespace PizzaBox.Client
       System.Console.WriteLine("please select your toppings");
       PrintToppings();
       customPizza = AddTopping(customPizza);
-      var response = Console.ReadLine();
-      // customPizza = SelectCrust(customPizza);
-
+      System.Console.WriteLine("please select your crust");
+      PrintCrusts();
+      customPizza = SelectCrust(customPizza);
+      System.Console.WriteLine("please select your size");
+      PrintSizes();
+      SelectSize(customPizza);
       return customPizza;
-
     }
+
+    private static CustomPizza SelectSize(CustomPizza customPizza)
+    {
+      //store input
+      string input = System.Console.ReadLine();
+      int index = int.Parse(input);
+      Size size = new Size(Size.sizes[index - 1]);
+      customPizza.Size = size;
+      return customPizza;
+    }
+
+    private static void PrintSizes()
+    {
+      var index = 0;
+      foreach (string item in Size.sizes)
+      {
+        Console.WriteLine($"{++index} - {item}");
+      }
+    }
+
     private static CustomPizza AddTopping(CustomPizza customPizza)
     {
       var index = Console.ReadLine();
@@ -154,6 +176,26 @@ namespace PizzaBox.Client
       }
       return customPizza;
     }
+
+    private static CustomPizza SelectCrust(CustomPizza customPizza)
+    {
+      string input = System.Console.ReadLine();
+      int index = int.Parse(input);
+      string crustName = Crust.crustsOptions[index - 1];
+      Crust crust = new Crust(crustName);
+      customPizza.Crust = crust;
+      return customPizza;
+    }
+    private static void PrintCrusts()
+    {
+      int index = 0;
+      foreach (string item in Crust.crustsOptions)
+      {
+        Console.WriteLine($"{++index} - {item}");
+      }
+    }
   }
+
 }
+
 
