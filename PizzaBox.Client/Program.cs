@@ -132,17 +132,27 @@ namespace PizzaBox.Client
       CustomPizza customPizza = new CustomPizza();
       System.Console.WriteLine("please select your toppings");
       PrintToppings();
-      AddTopping(customPizza);
-      System.Console.WriteLine("add another?");
+      customPizza = AddTopping(customPizza);
+      var response = Console.ReadLine();
+      // customPizza = SelectCrust(customPizza);
+
       return customPizza;
 
     }
-    private static void AddTopping(CustomPizza customPizza)
+    private static CustomPizza AddTopping(CustomPizza customPizza)
     {
       var index = Console.ReadLine();
       var valid = int.TryParse(index, out int input);
       customPizza.Toppings.Add(new Topping(Topping.toppings[int.Parse(index) - 1]));
       System.Console.WriteLine(input);
+      System.Console.WriteLine("add another? (Y/N)");
+      var response = Console.ReadLine();
+      if (response == "Y")
+      {
+        PrintToppings();
+        AddTopping(customPizza);
+      }
+      return customPizza;
     }
   }
 }
