@@ -103,6 +103,8 @@ namespace PizzaBox.Client
       }
 
       var pizza = _pizzaSingleton.Pizzas[input - 1];
+      PrintSizes();
+      SelectSize(pizza);
 
 
       PrintOrder(pizza);
@@ -142,18 +144,18 @@ namespace PizzaBox.Client
       return customPizza;
     }
 
-    private static CustomPizza SelectSize(CustomPizza customPizza)
+    private static APizza SelectSize(APizza currentPizza)
     {
-      //store input
       string input = System.Console.ReadLine();
       int index = int.Parse(input);
       Size size = new Size(Size.sizes[index - 1]);
-      customPizza.Size = size;
-      return customPizza;
+      currentPizza.Size = size;
+      return currentPizza;
     }
 
     private static void PrintSizes()
     {
+      System.Console.WriteLine("Please select a size");
       var index = 0;
       foreach (string item in Size.sizes)
       {

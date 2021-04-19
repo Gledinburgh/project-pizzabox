@@ -10,13 +10,13 @@ It is a command line-based application focused on nothing but pizzas.
 -x should be able to view all stores
 -x should be able to select a store
 -x should be to place an order
-- should be able to choose either custom or pre-set pizzas
+-x should be able to choose either custom or pre-set pizzas
 
   for a custom pizza
-  - should be able to choose crust, size and toppings
+  -x should be able to choose crust, size and toppings
 
   for a preset pizza
-  - should be able to choose pizza and size
+  -x should be able to choose pizza and size
 
 - should be able to view a preview of the order in progress
 - should be able to modify the order in progress (add/remove pizza)
