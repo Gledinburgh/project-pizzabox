@@ -5,7 +5,7 @@ using PizzaBox.Storing.Repositories;
 namespace PizzaBox.Client.Singletons
 {
   /// <summary>
-  /// 
+  ///
   /// </summary>
   public class StoreSingleton
   {
@@ -28,7 +28,7 @@ namespace PizzaBox.Client.Singletons
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private StoreSingleton()
     {

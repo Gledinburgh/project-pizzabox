@@ -5,15 +5,15 @@ using PizzaBox.Storing.Repositories;
 namespace PizzaBox.Client.Singletons
 {
   /// <summary>
-  /// 
+  ///
   /// </summary>
   public class PizzaSingleton
   {
+    private const string _path = @"data/pizzas.xml";
     private readonly FileRepository _fileRepository = new FileRepository();
     private static PizzaSingleton _instance;
-    private const string _path = @"data/pizzas.xml";
 
-    public List<APizza> Pizzas { get; set; }
+    public List<APizza> Pizzas { get; private set; }
     public static PizzaSingleton Instance
     {
       get
@@ -28,11 +28,14 @@ namespace PizzaBox.Client.Singletons
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private PizzaSingleton()
     {
-      Pizzas = _fileRepository.ReadFromFile<List<APizza>>(_path);
+      if (Pizzas == null)
+      {
+        Pizzas = _fileRepository.ReadFromFile<List<APizza>>(_path);
+      }
     }
   }
 }

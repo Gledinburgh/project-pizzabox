@@ -3,6 +3,7 @@ using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Client.Singletons;
 using PizzaBox.Domain.Models.Pizzas;
+using System.Collections.Generic;
 
 namespace PizzaBox.Client
 {
@@ -34,6 +35,7 @@ namespace PizzaBox.Client
 
       order.Customer = new Customer();
       order.Store = SelectStore();
+      PrintPizzaList();
       order.Pizza = SelectPizza();
     }
 
@@ -50,35 +52,24 @@ namespace PizzaBox.Client
     /// </summary>
     private static void PrintPizzaList()
     {
-      var index = 0;
-
-      foreach (var item in _pizzaSingleton.Pizzas)
-      {
-        Console.WriteLine($"{++index} - {item}");
-      }
+      InterfaceSingleton.printList(_pizzaSingleton.Pizzas, "Please select a Pizza");
     }
 
     /// <summary>
     ///
     /// </summary>
+    private static void PrintSizes()
+    {
+      InterfaceSingleton.printList(Size.sizes, "Please select a size");
+    }
     private static void PrintStoreList()
     {
-      var index = 0;
-
-      foreach (var item in _storeSingleton.Stores)
-      {
-        Console.WriteLine($"{++index} - {item}");
-      }
+      InterfaceSingleton.printList(_storeSingleton.Stores, "Please select a store");
     }
 
     private static void PrintToppings()
     {
-      var index = 0;
-      foreach (var topping in Topping.toppings)
-      {
-        Console.WriteLine($"{++index} - {topping}");
-      }
-
+      InterfaceSingleton.printList(Topping.toppings, "Please select a Topping");
     }
 
     /// <summary>
@@ -125,9 +116,9 @@ namespace PizzaBox.Client
         return null;
       }
 
-      PrintPizzaList();
+      AStore store = _storeSingleton.Stores[input - 1];
 
-      return _storeSingleton.Stores[input - 1];
+      return store;
     }
     private static CustomPizza CreateCustomPizza()
     {
@@ -151,16 +142,6 @@ namespace PizzaBox.Client
       Size size = new Size(Size.sizes[index - 1]);
       currentPizza.Size = size;
       return currentPizza;
-    }
-
-    private static void PrintSizes()
-    {
-      System.Console.WriteLine("Please select a size");
-      var index = 0;
-      foreach (string item in Size.sizes)
-      {
-        Console.WriteLine($"{++index} - {item}");
-      }
     }
 
     private static CustomPizza AddTopping(CustomPizza customPizza)
