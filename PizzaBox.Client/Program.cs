@@ -96,8 +96,10 @@ namespace PizzaBox.Client
 
       if (input == 1)
       {
-        CreateCustomPizza();
-        return null;
+        var custom = CreateCustomPizza();
+        PrintOrder(custom);
+        return custom;
+
       }
 
       var pizza = _pizzaSingleton.Pizzas[input - 1];
@@ -125,10 +127,22 @@ namespace PizzaBox.Client
 
       return _storeSingleton.Stores[input - 1];
     }
-    private static void CreateCustomPizza()
+    private static CustomPizza CreateCustomPizza()
     {
+      CustomPizza customPizza = new CustomPizza();
       System.Console.WriteLine("please select your toppings");
       PrintToppings();
+      AddTopping(customPizza);
+      System.Console.WriteLine("add another?");
+      return customPizza;
+
+    }
+    private static void AddTopping(CustomPizza customPizza)
+    {
+      var index = Console.ReadLine();
+      var valid = int.TryParse(index, out int input);
+      customPizza.Toppings.Add(new Topping(Topping.toppings[int.Parse(index) - 1]));
+      System.Console.WriteLine(input);
     }
   }
 }
