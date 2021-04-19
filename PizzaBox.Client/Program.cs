@@ -2,11 +2,12 @@
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Client.Singletons;
+using PizzaBox.Domain.Models.Pizzas;
 
 namespace PizzaBox.Client
 {
   /// <summary>
-  /// 
+  ///
   /// </summary>
   public class Program
   {
@@ -14,7 +15,7 @@ namespace PizzaBox.Client
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private static void Main()
     {
@@ -22,7 +23,7 @@ namespace PizzaBox.Client
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private static void Run()
     {
@@ -37,7 +38,7 @@ namespace PizzaBox.Client
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private static void PrintOrder(APizza pizza)
     {
@@ -45,7 +46,7 @@ namespace PizzaBox.Client
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private static void PrintPizzaList()
     {
@@ -58,7 +59,7 @@ namespace PizzaBox.Client
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private static void PrintStoreList()
     {
@@ -70,8 +71,18 @@ namespace PizzaBox.Client
       }
     }
 
+    private static void PrintToppings()
+    {
+      var index = 0;
+      foreach (var topping in Topping.toppings)
+      {
+        Console.WriteLine($"{++index} - {topping}");
+      }
+
+    }
+
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <returns></returns>
     private static APizza SelectPizza()
@@ -83,7 +94,14 @@ namespace PizzaBox.Client
         return null;
       }
 
+      if (input == 1)
+      {
+        CreateCustomPizza();
+        return null;
+      }
+
       var pizza = _pizzaSingleton.Pizzas[input - 1];
+
 
       PrintOrder(pizza);
 
@@ -91,7 +109,7 @@ namespace PizzaBox.Client
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <returns></returns>
     private static AStore SelectStore()
@@ -107,5 +125,11 @@ namespace PizzaBox.Client
 
       return _storeSingleton.Stores[input - 1];
     }
+    private static void CreateCustomPizza()
+    {
+      System.Console.WriteLine("please select your toppings");
+      PrintToppings();
+    }
   }
 }
+

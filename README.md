@@ -1,15 +1,15 @@
 # pizzabox
 
 Not impressed with UberEats, DoorDash, GrubHub pizza offerings?
-You can now try PizzaBox, the latest food delivery service. 
+You can now try PizzaBox, the latest food delivery service.
 It is a command line-based application focused on nothing but pizzas.
 
 ## as a customer
 
-- should be able to launch the application
-- should be able to view all stores
-- should be able to select a store
-- should be to place an order
+-x should be able to launch the application
+-x should be able to view all stores
+-x should be able to select a store
+-x should be to place an order
 - should be able to choose either custom or pre-set pizzas
 
   for a custom pizza
