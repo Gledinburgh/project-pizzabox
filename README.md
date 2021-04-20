@@ -18,8 +18,8 @@ It is a command line-based application focused on nothing but pizzas.
   for a preset pizza
   -x should be able to choose pizza and size
 
-- should be able to view a preview of the order in progress
-- should be able to modify the order in progress (add/remove pizza)
+-x should be able to view a preview of the order in progress
+-x should be able to modify the order in progress (add/remove pizza)
 - should be able to place/checkout the order in progress
 - should be able to view order history
 - should be able to make new order
@@ -60,24 +60,24 @@ The application is centered around the interaction of 4 main objects:
 
 ### store
 
-+ [required] there should exist at least 2 stores for a customer to choose from
+x [required] there should exist at least 2 stores for a customer to choose from
 + [required] each store should be able to view any and all of their placed orders
 + [required] each store should be able to view any and all of their sales (weekly, monthly, quarterly)
 
 ### order
 
-+ [required] each order must be able to modify its collection of pizzas
+x [required] each order must be able to modify its collection of pizzas
 + [required] each order must be able to compute its pricing
 + [required] each order must be limited to a total pricing of no more than $250
 + [required] each order must be limited to a collection of pizzas of no more than 50
 
 ### pizza
 
-+ [required] each pizza must be able to have a crust
-+ [required] each pizza must be able to have a size
-+ [required] each pizza must be able to have toppings
+x [required] each pizza must be able to have a crust
+x [required] each pizza must be able to have a size
+x [required] each pizza must be able to have toppings
 + [required] each pizza must be able to compute its pricing
-+ [required] each pizza must have no less than 2 default toppings
+x [required] each pizza must have no less than 2 default toppings
 + [required] each pizza must have no more than 5 total toppings
 
 ### customer

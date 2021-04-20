@@ -40,20 +40,31 @@ namespace PizzaBox.Client
       PrintPizzaList();
       order.Pizzas.Add(SelectPizza());
       PrintFinalActions();
-      SelectFinalAction(order);
+      Boolean openMenue = true;
+      while (openMenue)
+      {
+        PrintFinalActions();
+        SelectFinalAction(order);
+      }
     }
 
-    private static void SelectFinalAction(Order order)
+    private static Boolean SelectFinalAction(Order order)
     {
       int input = int.Parse(System.Console.ReadLine());
       if (input == 1) PrintOrder(order);
-      if (input == 2) PrintPizzaList(); order.Pizzas.Add(SelectPizza());
-      if (input == 7) return;
-      PrintFinalActions();
-      SelectFinalAction(order);
-
+      else if (input == 2) { PrintPizzaList(); order.Pizzas.Add(SelectPizza()); }
+      else if (input == 3) removePizza(order);
+      else if (input == 7) return false;
+      return true;
     }
 
+    private static void removePizza(Order order)
+    {
+      PrintOrder(order);
+      System.Console.WriteLine("Select a pizza to remove");
+      int input = int.Parse(System.Console.ReadLine());
+      order.Pizzas.Remove(order.Pizzas[input - 1]);
+    }
     private static void PrintFinalActions()
     {
       InterfaceSingleton.printList(_interfaceSingleton.FinalActions, ("=========================="));
@@ -64,12 +75,7 @@ namespace PizzaBox.Client
     /// </summary>
     private static void PrintOrder(Order order)
     {
-      foreach (APizza pizza in order.Pizzas)
-      {
-        System.Console.WriteLine(pizza.ToString());
-        System.Console.WriteLine("Count:" + order.Pizzas.Count);
-
-      }
+      InterfaceSingleton.printList(order.Pizzas, "Your order so far");
     }
 
     /// <summary>
@@ -103,18 +109,12 @@ namespace PizzaBox.Client
     /// <returns></returns>
     private static APizza SelectPizza()
     {
-      var valid = int.TryParse(Console.ReadLine(), out int input);
-
-      if (!valid)
-      {
-        return null;
-      }
+      int input = int.Parse(System.Console.ReadLine());
 
       if (input == 1)
       {
         var custom = CreateCustomPizza();
         return custom;
-
       }
 
       var pizza = _pizzaSingleton.Pizzas[input - 1];

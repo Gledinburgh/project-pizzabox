@@ -21,6 +21,7 @@ namespace PizzaBox.Client.Singletons
     public static void printList<T>(List<T> list, string message)
     {
       int index = 0;
+      System.Console.WriteLine(("--------------------------"));
       System.Console.WriteLine(message);
       foreach (var item in list)
       {
