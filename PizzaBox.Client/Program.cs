@@ -47,6 +47,11 @@ namespace PizzaBox.Client
     {
       int input = int.Parse(System.Console.ReadLine());
       if (input == 1) PrintOrder(order);
+      if (input == 2) PrintPizzaList(); order.Pizzas.Add(SelectPizza());
+      if (input == 7) return;
+      PrintFinalActions();
+      SelectFinalAction(order);
+
     }
 
     private static void PrintFinalActions()
@@ -59,7 +64,12 @@ namespace PizzaBox.Client
     /// </summary>
     private static void PrintOrder(Order order)
     {
-      InterfaceSingleton.printList(order.Pizzas, "Your current order is:");
+      foreach (APizza pizza in order.Pizzas)
+      {
+        System.Console.WriteLine(pizza.ToString());
+        System.Console.WriteLine("Count:" + order.Pizzas.Count);
+
+      }
     }
 
     /// <summary>

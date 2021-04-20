@@ -37,6 +37,7 @@ namespace PizzaBox.Client.Singletons
       "Checkout with your current order",
       "View order history",
       "Make new order",
+      "Exit"
     };
     }
   }
