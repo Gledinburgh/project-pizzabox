@@ -6,16 +6,8 @@ namespace PizzaBox.Client.Singletons
   public class InterfaceSingleton
   {
     private static InterfaceSingleton _instance;
-    public List<string> FinalActions { get; } = new List<string>
-    {
-      "Preview of the order in progress",
-      "Add a pizza to your order",
-      "Remove a pizza from your order",
-      "Checkout with your current order",
-      "View order history",
-      "Make new order",
-    };
-    private static InterfaceSingleton Instance
+    public List<string> FinalActions { get; }
+    public static InterfaceSingleton Instance
     {
       get
       {
@@ -35,7 +27,18 @@ namespace PizzaBox.Client.Singletons
         System.Console.WriteLine($"{++index} - {item}");
       }
     }
-    private InterfaceSingleton() { }
+    private InterfaceSingleton()
+    {
+      FinalActions = new List<string>
+    {
+      "Preview your order in progress",
+      "Add a pizza to your order",
+      "Remove a pizza from your order",
+      "Checkout with your current order",
+      "View order history",
+      "Make new order",
+    };
+    }
   }
 }
 

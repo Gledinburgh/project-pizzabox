@@ -14,6 +14,7 @@ namespace PizzaBox.Client
   {
     private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
+    private static readonly InterfaceSingleton _interfaceSingleton = InterfaceSingleton.Instance;
 
     /// <summary>
     ///
@@ -31,20 +32,34 @@ namespace PizzaBox.Client
       var order = new Order();
 
       Console.WriteLine("Welcome to PizzaBox");
+      Console.WriteLine("==========================");
       PrintStoreList();
 
       order.Customer = new Customer();
       order.Store = SelectStore();
       PrintPizzaList();
-      order.Pizza = SelectPizza();
+      order.Pizzas.Add(SelectPizza());
+      PrintFinalActions();
+      SelectFinalAction(order);
+    }
+
+    private static void SelectFinalAction(Order order)
+    {
+      int input = int.Parse(System.Console.ReadLine());
+      if (input == 1) PrintOrder(order);
+    }
+
+    private static void PrintFinalActions()
+    {
+      InterfaceSingleton.printList(_interfaceSingleton.FinalActions, ("=========================="));
     }
 
     /// <summary>
     ///
     /// </summary>
-    private static void PrintOrder(APizza pizza)
+    private static void PrintOrder(Order order)
     {
-      Console.WriteLine($"Your order is: {pizza}");
+      InterfaceSingleton.printList(order.Pizzas, "Your current order is:");
     }
 
     /// <summary>
@@ -69,7 +84,7 @@ namespace PizzaBox.Client
 
     private static void PrintToppings()
     {
-      InterfaceSingleton.printList(Topping.toppings, "Please select a Topping");
+      InterfaceSingleton.printList(Topping.toppings, "Please select your toppings");
     }
 
     /// <summary>
@@ -88,7 +103,6 @@ namespace PizzaBox.Client
       if (input == 1)
       {
         var custom = CreateCustomPizza();
-        PrintOrder(custom);
         return custom;
 
       }
@@ -96,10 +110,6 @@ namespace PizzaBox.Client
       var pizza = _pizzaSingleton.Pizzas[input - 1];
       PrintSizes();
       SelectSize(pizza);
-
-
-      PrintOrder(pizza);
-
       return pizza;
     }
 
@@ -123,13 +133,10 @@ namespace PizzaBox.Client
     private static CustomPizza CreateCustomPizza()
     {
       CustomPizza customPizza = new CustomPizza();
-      System.Console.WriteLine("please select your toppings");
       PrintToppings();
       customPizza = AddTopping(customPizza);
-      System.Console.WriteLine("please select your crust");
       PrintCrusts();
       customPizza = SelectCrust(customPizza);
-      System.Console.WriteLine("please select your size");
       PrintSizes();
       SelectSize(customPizza);
       return customPizza;
@@ -171,11 +178,7 @@ namespace PizzaBox.Client
     }
     private static void PrintCrusts()
     {
-      int index = 0;
-      foreach (string item in Crust.crustsOptions)
-      {
-        Console.WriteLine($"{++index} - {item}");
-      }
+      InterfaceSingleton.printList(Crust.crustsOptions, "Please select your crust");
     }
   }
 
