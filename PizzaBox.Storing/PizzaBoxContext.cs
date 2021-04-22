@@ -70,6 +70,7 @@ namespace PizzaBox.Storing
       {
         new Customer() { EntityId = 1, Name = "Mac"}
       });
+
     }
   }
 }

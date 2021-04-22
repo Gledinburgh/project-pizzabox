@@ -191,7 +191,6 @@ namespace PizzaBox.Client
       InterfaceSingleton.printList(Crust.crustsOptions, "Please select your crust");
     }
   }
-
 }
 
 
