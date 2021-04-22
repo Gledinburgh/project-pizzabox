@@ -70,6 +70,10 @@ namespace PizzaBox.Storing
       {
         new Customer() { EntityId = 1, Name = "Mac"}
       });
+      builder.Entity<Order>().HasData(new Order[]
+      {
+        new Order() { EntityId = 1, CustomerEntityId = 1}
+      });
 
     }
   }
