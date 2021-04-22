@@ -16,6 +16,7 @@ namespace PizzaBox.Domain.Abstracts
   {
     public Crust Crust { get; set; }
     public Size Size { get; set; }
+    public long SizeEntityId { get; set; }
     public List<Topping> Toppings { get; set; }
 
     /// <summary>

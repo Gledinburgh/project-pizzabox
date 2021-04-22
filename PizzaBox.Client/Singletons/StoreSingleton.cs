@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Models;
 using PizzaBox.Storing;
 using PizzaBox.Storing.Repositories;
 
@@ -42,5 +43,14 @@ namespace PizzaBox.Client.Singletons
         Stores = _context.Stores.ToList();
       }
     }
+    public void AddOrder(AStore store, Order order)
+    {
+      System.Console.WriteLine("store: " + store);
+      System.Console.WriteLine("order: " + order.Store);
+      if (store.Orders == null) store.Orders = new List<Order>();
+      store.Orders.Add(order);
+      _context.SaveChanges();
+    }
   }
 }
+
