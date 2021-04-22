@@ -58,6 +58,11 @@ The application is centered around the interaction of 4 main objects:
 - Pizza
 - Store
 
+The database should maintain
+- Customer
+- Order
+- Store
+
 ### store
 
 x [required] there should exist at least 2 stores for a customer to choose from

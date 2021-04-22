@@ -76,6 +76,7 @@ namespace PizzaBox.Client
     private static void PrintOrder(Order order)
     {
       InterfaceSingleton.printList(order.Pizzas, "Your order so far");
+      System.Console.WriteLine("Store: " + order.Store + " Customer:" + order.Customer);
     }
 
     /// <summary>

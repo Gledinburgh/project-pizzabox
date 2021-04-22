@@ -7,6 +7,7 @@ namespace PizzaBox.Domain.Models
   public class Order : AModel
   {
     public Customer Customer { get; set; }
+    public long CustomerEntityId { get; set; }
     public AStore Store { get; set; }
     public APizza Pizza { get; set; }
     public List<APizza> Pizzas { get; set; }
@@ -18,7 +19,16 @@ namespace PizzaBox.Domain.Models
     {
       get
       {
-        return Pizza.Crust.Price + Pizza.Size.Price + Pizza.Toppings.Sum(t => t.Price);
+        var sum = 0m;
+        foreach (APizza pizza in Pizzas)
+        {
+          sum += pizza.Crust.Price + pizza.Size.Price;
+          foreach (Topping topping in pizza.Toppings)
+          {
+            sum += topping.Price;
+          }
+        }
+        return sum;
       }
     }
   }
