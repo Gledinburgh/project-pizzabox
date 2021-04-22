@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaBox.Storing;
 
 namespace PizzaBox.Storing.Migrations
 {
     [DbContext(typeof(PizzaBoxContext))]
-    partial class PizzaBoxContextModelSnapshot : ModelSnapshot
+    [Migration("20210422031510_Seeded order without excess  Entity")]
+    partial class SeededorderwithoutexcessEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,6 +140,14 @@ namespace PizzaBox.Storing.Migrations
                     b.HasIndex("StoreEntityId");
 
                     b.ToTable("Order");
+
+                    b.HasData(
+                        new
+                        {
+                            EntityId = 1L,
+                            CustomerEntityId = 0L,
+                            StoreEntityId = 0L
+                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Size", b =>

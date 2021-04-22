@@ -4,6 +4,7 @@ using PizzaBox.Domain.Models;
 using PizzaBox.Client.Singletons;
 using PizzaBox.Domain.Models.Pizzas;
 using System.Collections.Generic;
+using PizzaBox.Storing;
 
 namespace PizzaBox.Client
 {
@@ -14,6 +15,7 @@ namespace PizzaBox.Client
   {
     private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
+    private static readonly PizzaBoxContext _context = new PizzaBoxContext();
     private static readonly InterfaceSingleton _interfaceSingleton = InterfaceSingleton.Instance;
 
     /// <summary>
@@ -54,6 +56,7 @@ namespace PizzaBox.Client
       if (input == 1) PrintOrder(order);
       else if (input == 2) { PrintPizzaList(); order.Pizzas.Add(SelectPizza()); }
       else if (input == 3) removePizza(order);
+      else if (input == 4) PlaceOrder(order);
       else if (input == 7) return false;
       return true;
     }
@@ -76,7 +79,9 @@ namespace PizzaBox.Client
     private static void PrintOrder(Order order)
     {
       InterfaceSingleton.printList(order.Pizzas, "Your order so far");
-      System.Console.WriteLine("Store: " + order.Store + " Customer:" + order.Customer);
+      System.Console.WriteLine("Total: $" + order.TotalCost);
+      System.Console.WriteLine("Store: " + order.StoreEntityId
+      + " Customer:" + order.Customer.Name + "Time: " + order.TimeStamp.ToString("hh:mm:ss tt"));
     }
 
     /// <summary>
@@ -190,6 +195,12 @@ namespace PizzaBox.Client
     private static void PrintCrusts()
     {
       InterfaceSingleton.printList(Crust.crustsOptions, "Please select your crust");
+    }
+    private static void PlaceOrder(Order order)
+    {
+      _context.Add(order);
+      _context.SaveChanges();
+      System.Console.WriteLine("Thankyou " + order.Customer.Name + "! Your order has been placed.");
     }
   }
 }

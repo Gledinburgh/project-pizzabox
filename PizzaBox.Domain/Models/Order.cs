@@ -10,13 +10,23 @@ namespace PizzaBox.Domain.Models
     public Customer Customer { get; set; }
     public long CustomerEntityId { get; set; }
     public AStore Store { get; set; }
-    public DateTime TimeStamp { get; set; }
+    public long StoreEntityId { get; set; }
+
     public APizza Pizza { get; set; }
     public List<APizza> Pizzas { get; set; }
     public Order()
     {
       Pizzas = new List<APizza>();
     }
+
+    public DateTime TimeStamp
+    {
+      get
+      {
+        return DateTime.Now;
+      }
+    }
+
     public decimal TotalCost
     {
       get

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaBox.Storing;
 
 namespace PizzaBox.Storing.Migrations
 {
     [DbContext(typeof(PizzaBoxContext))]
-    partial class PizzaBoxContextModelSnapshot : ModelSnapshot
+    [Migration("20210422030343_Seeded order data with StoreEntity")]
+    partial class SeededorderdatawithStoreEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,6 +122,9 @@ namespace PizzaBox.Storing.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long?>("AStoreEntityId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("CustomerEntityId")
                         .HasColumnType("bigint");
 
@@ -131,13 +136,21 @@ namespace PizzaBox.Storing.Migrations
 
                     b.HasKey("EntityId");
 
+                    b.HasIndex("AStoreEntityId");
+
                     b.HasIndex("CustomerEntityId");
 
                     b.HasIndex("PizzaEntityId");
 
-                    b.HasIndex("StoreEntityId");
-
                     b.ToTable("Order");
+
+                    b.HasData(
+                        new
+                        {
+                            EntityId = 1L,
+                            CustomerEntityId = 1L,
+                            StoreEntityId = 1L
+                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Size", b =>
@@ -251,6 +264,10 @@ namespace PizzaBox.Storing.Migrations
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Order", b =>
                 {
+                    b.HasOne("PizzaBox.Domain.Abstracts.AStore", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("AStoreEntityId");
+
                     b.HasOne("PizzaBox.Domain.Models.Customer", "Customer")
                         .WithMany("orders")
                         .HasForeignKey("CustomerEntityId")
@@ -261,17 +278,9 @@ namespace PizzaBox.Storing.Migrations
                         .WithMany()
                         .HasForeignKey("PizzaEntityId");
 
-                    b.HasOne("PizzaBox.Domain.Abstracts.AStore", "Store")
-                        .WithMany("Orders")
-                        .HasForeignKey("StoreEntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Customer");
 
                     b.Navigation("Pizza");
-
-                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Topping", b =>
