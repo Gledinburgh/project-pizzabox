@@ -21,8 +21,8 @@ It is a command line-based application focused on nothing but pizzas.
 -x should be able to view a preview of the order in progress
 -x should be able to modify the order in progress (add/remove pizza)
 -x should be able to place/checkout the order in progress
-- should be able to view order history
-- should be able to make new order
+-x should be able to view order history
+-x should be able to make new order
 
 ## as a store
 

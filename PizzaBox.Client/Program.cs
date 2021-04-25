@@ -16,6 +16,7 @@ namespace PizzaBox.Client
     private static readonly CustomerSingleton _customerSingleton = CustomerSingleton.Instance;
     private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
+    private static readonly Order _orderSingleton = OrderSingleton.Order;
     private static readonly InterfaceSingleton _interfaceSingleton = InterfaceSingleton.Instance;
 
     /// <summary>
@@ -31,22 +32,29 @@ namespace PizzaBox.Client
     /// </summary>
     private static void Run()
     {
-      var order = new Order();
+
 
       Console.WriteLine("Welcome to PizzaBox");
       Console.WriteLine("==========================");
-      PrintStoreList();
-      order.Customer = SelectCustomer();
-      order.Store = SelectStore();
-      PrintPizzaList();
-      order.Pizzas.Add(SelectPizza());
+      Order order = CreateNewOrder();
       PrintFinalActions();
       Boolean openMenue = true;
       while (openMenue)
       {
         PrintFinalActions();
-        SelectFinalAction(order, order.Store);
+        openMenue = SelectFinalAction();
       }
+    }
+
+    private static Order CreateNewOrder()
+    {
+      OrderSingleton.CreateNewOrder();
+      _orderSingleton.Customer = SelectCustomer();
+      PrintStoreList();
+      _orderSingleton.Store = SelectStore();
+      PrintPizzaList();
+      _orderSingleton.Pizzas.Add(SelectPizza());
+      return _orderSingleton;
     }
 
     private static Customer SelectCustomer()
@@ -58,33 +66,34 @@ namespace PizzaBox.Client
       return customer;
     }
 
-    private static Boolean SelectFinalAction(Order order, AStore store)
+    private static Boolean SelectFinalAction()
     {
       int input = int.Parse(System.Console.ReadLine());
-      if (input == 1) PrintOrder(order);
-      else if (input == 2) { PrintPizzaList(); order.Pizzas.Add(SelectPizza()); }
-      else if (input == 3) removePizza(order);
-      else if (input == 4) PlaceOrder(store, order);
-      else if (input == 5) PrintCustomerOrderHistory(order.Customer);
+      if (input == 1) PrintOrder();
+      else if (input == 2) { PrintPizzaList(); _orderSingleton.Pizzas.Add(SelectPizza()); }
+      else if (input == 3) removePizza();
+      else if (input == 4) { PlaceOrder(); return false; }
+      else if (input == 5) PrintCustomerOrderHistory();
+      else if (input == 6) CreateNewOrder();
       else if (input == 7) return false;
       return true;
     }
 
-    private static void PrintCustomerOrderHistory(Customer customer)
+    private static void PrintCustomerOrderHistory()
     {
-      IEnumerable<Order> orders = _customerSingleton.FetchCustomerOrders(customer);
+      IEnumerable<Order> orders = _customerSingleton.FetchCustomerOrders(_orderSingleton.Customer);
       foreach (Order o in orders)
       {
         InterfaceSingleton.printList(o.Pizzas, o.TimeOfPurchase.ToString());
       }
     }
 
-    private static void removePizza(Order order)
+    private static void removePizza()
     {
-      PrintOrder(order);
+      PrintOrder();
       System.Console.WriteLine("Select a pizza to remove");
       int input = int.Parse(System.Console.ReadLine());
-      order.Pizzas.Remove(order.Pizzas[input - 1]);
+      _orderSingleton.Pizzas.Remove(_orderSingleton.Pizzas[input - 1]);
     }
     private static void PrintFinalActions()
     {
@@ -94,12 +103,12 @@ namespace PizzaBox.Client
     /// <summary>
     ///
     /// </summary>
-    private static void PrintOrder(Order order)
+    private static void PrintOrder()
     {
-      InterfaceSingleton.printList(order.Pizzas, "Your order so far");
-      System.Console.WriteLine("Total: $" + order.TotalCost);
-      System.Console.WriteLine("Store: " + order.StoreEntityId
-      + " Customer:" + order.Customer.Name + "Time: " + order.TimeStamp.ToString("hh:mm:ss tt"));
+      InterfaceSingleton.printList(_orderSingleton.Pizzas, "Your order so far");
+      System.Console.WriteLine("Total: $" + _orderSingleton.TotalCost);
+      System.Console.WriteLine("Store: " + _orderSingleton.StoreEntityId
+      + " Customer:" + _orderSingleton.Customer.Name + "Time: " + _orderSingleton.TimeStamp.ToString("hh:mm:ss tt"));
     }
 
     /// <summary>
@@ -215,10 +224,11 @@ namespace PizzaBox.Client
     {
       InterfaceSingleton.printList(Crust.crustsOptions, "Please select your crust");
     }
-    private static void PlaceOrder(AStore store, Order order)
+    private static void PlaceOrder()
     {
-      _storeSingleton.AddOrder(store, order);
-      System.Console.WriteLine("Thankyou " + order.Customer.Name + "! Your order has been placed.");
+      _storeSingleton.AddOrder(_orderSingleton.Store, _orderSingleton);
+      System.Console.WriteLine("Thankyou " + _orderSingleton.Customer.Name + "! Your order has been placed.");
+      OrderSingleton.CreateNewOrder();
     }
   }
 }
