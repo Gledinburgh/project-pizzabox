@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PizzaBox.Domain.Abstracts;
@@ -46,6 +47,7 @@ namespace PizzaBox.Storing
       builder.Entity<VeggiePizza>().HasBaseType<APizza>();
 
       builder.Entity<Crust>().HasKey(e => e.EntityId);
+
       builder.Entity<Order>().HasKey(e => e.EntityId);
       builder.Entity<Size>().HasKey(e => e.EntityId);
       builder.Entity<Topping>().HasKey(e => e.EntityId);
@@ -69,6 +71,10 @@ namespace PizzaBox.Storing
       builder.Entity<Customer>().HasData(new Customer[]
       {
         new Customer() { EntityId = 1, Name = "Mac"}
+      });
+      builder.Entity<Order>().HasData(new Order[]
+      {
+        new Order() { EntityId = 20, TimeOfPurchase = new DateTime(), CustomerEntityId = 14, StoreEntityId = 1}
       });
     }
   }

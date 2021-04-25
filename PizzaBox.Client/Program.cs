@@ -65,8 +65,18 @@ namespace PizzaBox.Client
       else if (input == 2) { PrintPizzaList(); order.Pizzas.Add(SelectPizza()); }
       else if (input == 3) removePizza(order);
       else if (input == 4) PlaceOrder(store, order);
+      else if (input == 5) PrintCustomerOrderHistory(order.Customer);
       else if (input == 7) return false;
       return true;
+    }
+
+    private static void PrintCustomerOrderHistory(Customer customer)
+    {
+      IEnumerable<Order> orders = _customerSingleton.FetchCustomerOrders(customer);
+      foreach (Order o in orders)
+      {
+        InterfaceSingleton.printList(o.Pizzas, o.TimeOfPurchase.ToString());
+      }
     }
 
     private static void removePizza(Order order)

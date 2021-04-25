@@ -14,7 +14,7 @@ namespace PizzaBox.Client.Singletons
   {
     private const string _path = @"data/stores.xml";
     private readonly FileRepository _fileRepository = new FileRepository();
-    private readonly PizzaBoxContext _context = new PizzaBoxContext();
+    public readonly PizzaBoxContext _context = ContextSingleton.Instance.Context;
     private static StoreSingleton _instance;
 
 
@@ -46,6 +46,7 @@ namespace PizzaBox.Client.Singletons
     public void AddOrder(AStore store, Order order)
     {
       if (store.Orders == null) store.Orders = new List<Order>();
+      order.TimeOfPurchase = order.TimeStamp;
       store.Orders.Add(order);
       _context.SaveChanges();
     }

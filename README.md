@@ -112,3 +112,4 @@ x [required] each pizza must have no less than 2 default toppings
 todo:
   create tests
   refactor database access using LINQ
+  abstract print function calls to singleton

@@ -13,6 +13,7 @@ namespace PizzaBox.Domain.Models
     public long StoreEntityId { get; set; }
 
     public APizza Pizza { get; set; }
+    public DateTime TimeOfPurchase { get; set; }
     public List<APizza> Pizzas { get; set; }
     public Order()
     {

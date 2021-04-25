@@ -11,12 +11,15 @@ add customer object
 
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PizzaBox.Domain.Models;
+using PizzaBox.Domain.Abstracts;
 using PizzaBox.Storing;
+using PizzaBox.Client.Singletons;
 
 public class CustomerSingleton
 {
-  public readonly PizzaBoxContext _context = new PizzaBoxContext();
+  public readonly PizzaBoxContext _context = ContextSingleton.Instance.Context;
   private static CustomerSingleton _instance;
   public List<Customer> Customers { get; }
   public static CustomerSingleton Instance
@@ -56,8 +59,27 @@ public class CustomerSingleton
     }
     return AddCustomer(name);
   }
-  //check db for name entered
-  //if in db then return customer object
-  //if not in db call AddCustomer
+  public IEnumerable<Order> FetchCustomerOrders(Customer customer)
+  {
+    var orders = new List<Order>();
+    // var stores = _context.Stores
+    //             .Include(s => s.Orders.Where(o => o.CustomerEntityId == customer.EntityId));
+    // var stores = _context.Stores
+    //             .Include(s => s.Orders.Where(o => o.CustomerEntityId == customer.EntityId));
+    var stores = _context.Stores
+    .Include(s => s.Orders)
+    .ThenInclude(o => o.Pizzas)
+    .Include(s => s.Orders)
+    // .ThenInclude(o => o.TimeOfPurchase)
+    .Include(s => s.Orders.Where(o => o.CustomerEntityId == customer.EntityId));
 
+    foreach (AStore s in stores)
+    {
+      foreach (Order o in s.Orders)
+      {
+        orders.Add(o);
+      }
+    }
+    return orders;
+  }
 }
