@@ -20,7 +20,7 @@ It is a command line-based application focused on nothing but pizzas.
 
 -x should be able to view a preview of the order in progress
 -x should be able to modify the order in progress (add/remove pizza)
-- should be able to place/checkout the order in progress
+-x should be able to place/checkout the order in progress
 - should be able to view order history
 - should be able to make new order
 
@@ -72,7 +72,7 @@ x [required] there should exist at least 2 stores for a customer to choose from
 ### order
 
 x [required] each order must be able to modify its collection of pizzas
-+ [required] each order must be able to compute its pricing
+x [required] each order must be able to compute its pricing
 + [required] each order must be limited to a total pricing of no more than $250
 + [required] each order must be limited to a collection of pizzas of no more than 50
 
@@ -108,3 +108,7 @@ x [required] each pizza must have no less than 2 default toppings
   - able to save a placed order including customer info, pizza info, store info
 
 > the goal is to try to complete as many reqs as you can in the time alloted. :)
+
+todo:
+  create tests
+  refactor database access using LINQ

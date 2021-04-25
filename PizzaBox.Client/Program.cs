@@ -13,6 +13,7 @@ namespace PizzaBox.Client
   /// </summary>
   public class Program
   {
+    private static readonly CustomerSingleton _customerSingleton = CustomerSingleton.Instance;
     private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
     private static readonly InterfaceSingleton _interfaceSingleton = InterfaceSingleton.Instance;
@@ -35,8 +36,7 @@ namespace PizzaBox.Client
       Console.WriteLine("Welcome to PizzaBox");
       Console.WriteLine("==========================");
       PrintStoreList();
-
-      order.Customer = new Customer();
+      order.Customer = SelectCustomer();
       order.Store = SelectStore();
       PrintPizzaList();
       order.Pizzas.Add(SelectPizza());
@@ -47,6 +47,15 @@ namespace PizzaBox.Client
         PrintFinalActions();
         SelectFinalAction(order, order.Store);
       }
+    }
+
+    private static Customer SelectCustomer()
+    {
+      System.Console.WriteLine("What is your name?");
+      string input = System.Console.ReadLine();
+      Customer customer = _customerSingleton.FetchCustomer(input);
+      System.Console.WriteLine("It's Good to see you, " + customer.Name);
+      return customer;
     }
 
     private static Boolean SelectFinalAction(Order order, AStore store)
@@ -170,6 +179,7 @@ namespace PizzaBox.Client
     {
       var index = Console.ReadLine();
       var valid = int.TryParse(index, out int input);
+
       customPizza.Toppings.Add(new Topping(Topping.toppings[int.Parse(index) - 1]));
       System.Console.WriteLine(input);
       System.Console.WriteLine("add another? (Y/N)");
