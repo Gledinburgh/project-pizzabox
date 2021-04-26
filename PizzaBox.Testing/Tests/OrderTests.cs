@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Models.Pizzas;
 using PizzaBox.Domain.Abstracts;
+using System;
+
 namespace PizzaBox.Testing.Tests
 {
 
@@ -20,7 +22,6 @@ namespace PizzaBox.Testing.Tests
       new CustomPizza()
    };
     [Fact]
-
     public void Test_Order_TotalCost()
     {
       testOrder.Pizzas = testPizzas;
@@ -28,6 +29,15 @@ namespace PizzaBox.Testing.Tests
       var sut = testOrder;
       var actual = sut.TotalCost;
       Assert.Equal(actual, 37.5m);
+    }
+    [Fact]
+    public void Test_Order_TimeStamp()
+    {
+      testOrder.TimeOfPurchase = testOrder.TimeStamp;
+      var sut = testOrder;
+      var actual = testOrder.TimeOfPurchase;
+      Assert.IsType<DateTime>(actual);
+      Assert.NotNull(actual);
     }
   }
 }

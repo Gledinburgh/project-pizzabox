@@ -226,7 +226,7 @@ namespace PizzaBox.Client
     {
       InterfaceSingleton.printList(Crust.crustsOptions, "Please select your crust");
     }
-    private static bool PlaceOrder()
+    public static bool PlaceOrder()
     {
       if (_orderSingleton.TotalCost <= 250 && _orderSingleton.Pizzas.Count <= 50)
       {
