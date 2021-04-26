@@ -34,8 +34,13 @@ namespace PizzaBox.Client
     {
 
 
-      Console.WriteLine("Welcome to PizzaBox");
-      Console.WriteLine("==========================");
+      Console.WriteLine("\n");
+      Console.WriteLine("===========================");
+      Console.WriteLine("--- Welcome to PizzaBox ---");
+      Console.WriteLine("===========================");
+      Console.WriteLine("\n");
+      Console.WriteLine("Let's get your order started");
+      Console.WriteLine("\n");
       Order order = CreateNewOrder();
       PrintFinalActions();
       Boolean openMenue = true;
@@ -59,11 +64,10 @@ namespace PizzaBox.Client
 
     private static Customer SelectCustomer()
     {
-      System.Console.WriteLine("What is your name?");
+      System.Console.WriteLine("First, What is your name?");
       string input = System.Console.ReadLine();
       Customer customer = _customerSingleton.FetchCustomer(input);
-      System.Console.WriteLine("\n2It's Good to see you, " + customer.Name + "\n");
-      Console.WriteLine("Place your order");
+      System.Console.WriteLine("\nIt's Good to see you, " + customer.Name + "\n");
 
       return customer;
     }
@@ -118,6 +122,7 @@ namespace PizzaBox.Client
     /// </summary>
     private static void PrintPizzaList()
     {
+      System.Console.WriteLine("\n");
       InterfaceSingleton.printList(_pizzaSingleton.Pizzas, "Please select a Pizza");
     }
 
@@ -130,7 +135,7 @@ namespace PizzaBox.Client
     }
     private static void PrintStoreList()
     {
-      InterfaceSingleton.printList(_storeSingleton.Stores, "First, Please select a store");
+      InterfaceSingleton.printList(_storeSingleton.Stores, "Please select a store");
     }
 
     private static void PrintToppings()
@@ -172,7 +177,7 @@ namespace PizzaBox.Client
       }
 
       AStore store = _storeSingleton.Stores[input - 1];
-      System.Console.WriteLine("store: " + store);
+      System.Console.WriteLine("Store: " + store);
       return store;
     }
     private static CustomPizza CreateCustomPizza()

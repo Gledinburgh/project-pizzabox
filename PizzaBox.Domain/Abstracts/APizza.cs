@@ -14,6 +14,7 @@ namespace PizzaBox.Domain.Abstracts
   [XmlInclude(typeof(VeggiePizza))]
   public abstract class APizza : AModel
   {
+    public string Name { get; set; }
     public Crust Crust { get; set; }
     public Size Size { get; set; }
     public long SizeEntityId { get; set; }
@@ -32,6 +33,7 @@ namespace PizzaBox.Domain.Abstracts
     /// </summary>
     protected virtual void Factory()
     {
+      AddName();
       AddCrust();
       AddSize();
       AddToppings();
@@ -40,6 +42,7 @@ namespace PizzaBox.Domain.Abstracts
     /// <summary>
     ///
     /// </summary>
+    protected abstract void AddName();
     protected abstract void AddCrust();
 
     /// <summary>
@@ -66,7 +69,16 @@ namespace PizzaBox.Domain.Abstracts
         stringBuilder.Append($"{item}{separator}");
       }
 
-      return $"{Crust} - {Size} - {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
+      return $"{Name}: Crust: {Crust} - Size: {Size} - Toppings: {stringBuilder.ToString().TrimEnd(separator.ToCharArray())} Price: ${PizzaPrice()}";
+    }
+    public decimal PizzaPrice()
+    {
+      decimal sum = Crust.Price + Size.Price;
+      foreach (Topping t in Toppings)
+      {
+        sum += t.Price;
+      }
+      return sum;
     }
   }
 }

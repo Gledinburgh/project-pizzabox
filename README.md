@@ -73,8 +73,8 @@ x [required] there should exist at least 2 stores for a customer to choose from
 
 x [required] each order must be able to modify its collection of pizzas
 x [required] each order must be able to compute its pricing
-+ [required] each order must be limited to a total pricing of no more than $250
-+ [required] each order must be limited to a collection of pizzas of no more than 50
+x [required] each order must be limited to a total pricing of no more than $250
+x [required] each order must be limited to a collection of pizzas of no more than 50
 
 ### pizza
 
@@ -87,7 +87,7 @@ x [required] each pizza must have no less than 2 default toppings
 
 ### customer
 
-+ [required] must be able to view its order history
+x [required] must be able to view its order history
 + [required] must be able to only order from 1 location in a 24-hour period with no reset
 + [required] must be able to only order once in a 2-hour period
 
@@ -103,9 +103,9 @@ x [required] each pizza must have no less than 2 default toppings
 - presentation on Apr-28 starting at 9.30a Central
 - try to implement as many requirements as you can (don't push to get all done)
 - should be an mvp (minimum viable product) status (20 hours)
-  - able to at least place an order with 1 pizza
+  x able to at least place an order with 1 pizza
   - able to at least have 10 total validation unit tests for Customer, Order, Pizza, Store
-  - able to save a placed order including customer info, pizza info, store info
+  x able to save a placed order including customer info, pizza info, store info
 
 > the goal is to try to complete as many reqs as you can in the time alloted. :)
 

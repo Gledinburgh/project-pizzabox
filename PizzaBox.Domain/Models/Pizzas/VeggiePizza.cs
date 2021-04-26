@@ -11,6 +11,10 @@ namespace PizzaBox.Domain.Models.Pizzas
     /// <summary>
     ///
     /// </summary>
+    protected override void AddName()
+    {
+      Name = "Veggie Pizza";
+    }
     protected override void AddCrust()
     {
       Crust = new Crust() { Name = "Neapolitan" };
