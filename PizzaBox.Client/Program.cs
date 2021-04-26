@@ -62,7 +62,9 @@ namespace PizzaBox.Client
       System.Console.WriteLine("What is your name?");
       string input = System.Console.ReadLine();
       Customer customer = _customerSingleton.FetchCustomer(input);
-      System.Console.WriteLine("It's Good to see you, " + customer.Name);
+      System.Console.WriteLine("\n2It's Good to see you, " + customer.Name + "\n");
+      Console.WriteLine("Place your order");
+
       return customer;
     }
 
@@ -72,7 +74,7 @@ namespace PizzaBox.Client
       if (input == 1) PrintOrder();
       else if (input == 2) { PrintPizzaList(); _orderSingleton.Pizzas.Add(SelectPizza()); }
       else if (input == 3) removePizza();
-      else if (input == 4) { PlaceOrder(); return false; }
+      else if (input == 4) return PlaceOrder();
       else if (input == 5) PrintCustomerOrderHistory();
       else if (input == 6) CreateNewOrder();
       else if (input == 7) return false;
@@ -128,7 +130,7 @@ namespace PizzaBox.Client
     }
     private static void PrintStoreList()
     {
-      InterfaceSingleton.printList(_storeSingleton.Stores, "Please select a store");
+      InterfaceSingleton.printList(_storeSingleton.Stores, "First, Please select a store");
     }
 
     private static void PrintToppings()
@@ -224,11 +226,19 @@ namespace PizzaBox.Client
     {
       InterfaceSingleton.printList(Crust.crustsOptions, "Please select your crust");
     }
-    private static void PlaceOrder()
+    private static bool PlaceOrder()
     {
-      _storeSingleton.AddOrder(_orderSingleton.Store, _orderSingleton);
-      System.Console.WriteLine("Thankyou " + _orderSingleton.Customer.Name + "! Your order has been placed.");
-      OrderSingleton.CreateNewOrder();
+      if (_orderSingleton.TotalCost <= 250 && _orderSingleton.Pizzas.Count <= 50)
+      {
+        _storeSingleton.AddOrder(_orderSingleton.Store, _orderSingleton);
+        System.Console.WriteLine("Thankyou " + _orderSingleton.Customer.Name + "! Your order has been placed.");
+        return false;
+      }
+      else
+      {
+        System.Console.WriteLine("Your order Exceeds order limit of $250 or the maximum of 50 pizzas, please remove Items before subbmitting your order");
+        return true;
+      }
     }
   }
 }

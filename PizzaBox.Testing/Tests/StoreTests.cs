@@ -14,7 +14,7 @@ namespace PizzaBox.Testing.Tests
     };
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [Fact]
     public void Test_ChicagoStore()
@@ -31,7 +31,7 @@ namespace PizzaBox.Testing.Tests
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [Fact]
     public void Test_NewYorkStore()
@@ -41,10 +41,6 @@ namespace PizzaBox.Testing.Tests
       Assert.True(sut.Name.Equals("NewYorkStore"));
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="store"></param>
     [Theory]
     [MemberData(nameof(values))]
     public void Test_StoreName(AStore store)
@@ -53,11 +49,6 @@ namespace PizzaBox.Testing.Tests
       Assert.Equal(store.Name, store.ToString());
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="storeName"></param>
-    /// <param name="x"></param>
     [Theory]
     [InlineData("ChicagoStore")]
     [InlineData("NewYorkStore")]

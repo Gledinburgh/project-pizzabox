@@ -31,7 +31,7 @@ namespace PizzaBox.Client.Singletons
     private InterfaceSingleton()
     {
       FinalActions = new List<string>
-    {
+      {
       "Preview your order in progress",
       "Add a pizza to your order",
       "Remove a pizza from your order",
@@ -39,8 +39,14 @@ namespace PizzaBox.Client.Singletons
       "View order history",
       "Make new order",
       "Exit"
-    };
+      };
     }
+    public static List<string> OpeningActions = new List<string>
+    {
+      "View order history",
+      "Make new order",
+      "Exit"
+    };
   }
 }
 
