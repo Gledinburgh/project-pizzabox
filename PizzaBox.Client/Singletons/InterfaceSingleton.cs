@@ -21,8 +21,10 @@ namespace PizzaBox.Client.Singletons
     public static void printList<T>(List<T> list, string message)
     {
       int index = 0;
+      System.Console.WriteLine(("\n"));
       System.Console.WriteLine(("--------------------------"));
       System.Console.WriteLine(message);
+      System.Console.WriteLine(("--------------------------"));
       foreach (var item in list)
       {
         System.Console.WriteLine($"{++index} - {item}");

@@ -14,7 +14,7 @@ namespace PizzaBox.Domain.Abstracts
   [XmlInclude(typeof(VeggiePizza))]
   public abstract class APizza : AModel
   {
-    public string Name { get; set; }
+    public string Name;
     public Crust Crust { get; set; }
     public Size Size { get; set; }
     public long SizeEntityId { get; set; }
@@ -69,7 +69,7 @@ namespace PizzaBox.Domain.Abstracts
         stringBuilder.Append($"{item}{separator}");
       }
 
-      return $"{Name}: Crust: {Crust} - Size: {Size} - Toppings: {stringBuilder.ToString().TrimEnd(separator.ToCharArray())} Price: ${PizzaPrice()}";
+      return $"{Name} - Crust: {Crust} - Size: {Size} - Toppings: {stringBuilder.ToString().TrimEnd(separator.ToCharArray())} Price: ${PizzaPrice()}";
     }
     public decimal PizzaPrice()
     {

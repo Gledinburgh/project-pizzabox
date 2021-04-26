@@ -42,7 +42,6 @@ namespace PizzaBox.Client
       Console.WriteLine("Let's get your order started");
       Console.WriteLine("\n");
       Order order = CreateNewOrder();
-      PrintFinalActions();
       Boolean openMenue = true;
       while (openMenue)
       {
@@ -67,7 +66,7 @@ namespace PizzaBox.Client
       System.Console.WriteLine("First, What is your name?");
       string input = System.Console.ReadLine();
       Customer customer = _customerSingleton.FetchCustomer(input);
-      System.Console.WriteLine("\nIt's Good to see you, " + customer.Name + "\n");
+      System.Console.WriteLine("\nIt's Good to see you, " + customer.Name);
 
       return customer;
     }
@@ -90,7 +89,7 @@ namespace PizzaBox.Client
       IEnumerable<Order> orders = _customerSingleton.FetchCustomerOrders(_orderSingleton.Customer);
       foreach (Order o in orders)
       {
-        InterfaceSingleton.printList(o.Pizzas, o.TimeOfPurchase.ToString());
+        InterfaceSingleton.printList(o.Pizzas, o.TimeOfPurchase.ToString("MMMM dd, yyyy"));
       }
     }
 
@@ -103,7 +102,7 @@ namespace PizzaBox.Client
     }
     private static void PrintFinalActions()
     {
-      InterfaceSingleton.printList(_interfaceSingleton.FinalActions, ("=========================="));
+      InterfaceSingleton.printList(_interfaceSingleton.FinalActions, ("What would you like to do next"));
     }
 
     /// <summary>
@@ -113,8 +112,7 @@ namespace PizzaBox.Client
     {
       InterfaceSingleton.printList(_orderSingleton.Pizzas, "Your order so far");
       System.Console.WriteLine("Total: $" + _orderSingleton.TotalCost);
-      System.Console.WriteLine("Store: " + _orderSingleton.StoreEntityId
-      + " Customer:" + _orderSingleton.Customer.Name + "Time: " + _orderSingleton.TimeStamp.ToString("hh:mm:ss tt"));
+      System.Console.WriteLine("Store:" + _orderSingleton.Store.Name + " Customer:" + _orderSingleton.Customer.Name + " Time:" + _orderSingleton.TimeStamp.ToString("hh:mm tt"));
     }
 
     /// <summary>
@@ -122,7 +120,7 @@ namespace PizzaBox.Client
     /// </summary>
     private static void PrintPizzaList()
     {
-      System.Console.WriteLine("\n");
+
       InterfaceSingleton.printList(_pizzaSingleton.Pizzas, "Please select a Pizza");
     }
 
@@ -208,6 +206,12 @@ namespace PizzaBox.Client
 
       customPizza.Toppings.Add(new Topping(Topping.toppings[int.Parse(index) - 1]));
       System.Console.WriteLine(input);
+      if (customPizza.Toppings.Count > 4)
+      {
+        System.Console.WriteLine("\n");
+        InterfaceSingleton.printList(customPizza.Toppings, "Here are your Selected Toppings");
+        return customPizza;
+      }
       System.Console.WriteLine("add another? (Y/N)");
       var response = Console.ReadLine();
       if (response == "Y")

@@ -81,9 +81,9 @@ x [required] each order must be limited to a collection of pizzas of no more tha
 x [required] each pizza must be able to have a crust
 x [required] each pizza must be able to have a size
 x [required] each pizza must be able to have toppings
-+ [required] each pizza must be able to compute its pricing
+x [required] each pizza must be able to compute its pricing
 x [required] each pizza must have no less than 2 default toppings
-+ [required] each pizza must have no more than 5 total toppings
+x [required] each pizza must have no more than 5 total toppings
 
 ### customer
 
