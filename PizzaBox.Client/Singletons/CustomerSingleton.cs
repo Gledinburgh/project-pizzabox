@@ -59,7 +59,7 @@ public class CustomerSingleton
     }
     return AddCustomer(name);
   }
-  public IEnumerable<Order> FetchCustomerOrders(Customer customer)
+  public List<Order> FetchCustomerOrders(Customer customer)
   {
     var orders = new List<Order>();
     // var stores = _context.Stores

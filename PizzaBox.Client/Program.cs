@@ -237,7 +237,12 @@ namespace PizzaBox.Client
     }
     public static bool PlaceOrder()
     {
-      if (_orderSingleton.TotalCost <= 250 && _orderSingleton.Pizzas.Count <= 50)
+      if (ValidateOrderTime() == false)
+      {
+        System.Console.WriteLine("A new order can not be placed within 2 hours of last order");
+        return true;
+      }
+      else if (_orderSingleton.TotalCost <= 250 && _orderSingleton.Pizzas.Count <= 50)
       {
         _storeSingleton.AddOrder(_orderSingleton.Store, _orderSingleton);
         System.Console.WriteLine("Thankyou " + _orderSingleton.Customer.Name + "! Your order has been placed.");
@@ -248,6 +253,21 @@ namespace PizzaBox.Client
         System.Console.WriteLine("Your order Exceeds order limit of $250 or the maximum of 50 pizzas, please remove Items before subbmitting your order");
         return true;
       }
+    }
+    public static bool ValidateOrderTime()
+    {
+      DateTime timeOfPurchase;
+      List<Order> orders = _customerSingleton.FetchCustomerOrders(_orderSingleton.Customer);
+      if (orders.Count >= 1)
+      {
+        timeOfPurchase = orders[orders.Count - 1].TimeOfPurchase;
+        DateTime currentTime = DateTime.Now;
+        int timeElapsed = currentTime.Subtract(timeOfPurchase).Hours;
+        System.Console.WriteLine("\nTime elapsed since last order: " + timeElapsed);
+        if (timeElapsed <= 2) return false;
+      }
+
+      return true;
     }
   }
 }
