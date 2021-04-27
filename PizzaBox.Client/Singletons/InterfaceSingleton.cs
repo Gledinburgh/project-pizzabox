@@ -22,9 +22,9 @@ namespace PizzaBox.Client.Singletons
     {
       int index = 0;
       System.Console.WriteLine(("\n"));
-      System.Console.WriteLine(("--------------------------"));
+      System.Console.WriteLine(("----------------------------------"));
       System.Console.WriteLine(message);
-      System.Console.WriteLine(("--------------------------"));
+      System.Console.WriteLine(("----------------------------------"));
       foreach (var item in list)
       {
         System.Console.WriteLine($"{++index} - {item}");

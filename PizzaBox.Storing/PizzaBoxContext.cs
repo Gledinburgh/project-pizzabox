@@ -19,6 +19,7 @@ namespace PizzaBox.Storing
     public DbSet<APizza> Pizzas { get; set; }
     public DbSet<Customer> Customers { get; set; }
 
+    public DbSet<Crust> Crust { get; set; }
     public DbSet<Size> Sizes { get; set; }
     //dependency injection
     public PizzaBoxContext()
@@ -75,6 +76,18 @@ namespace PizzaBox.Storing
       builder.Entity<Order>().HasData(new Order[]
       {
         new Order() { EntityId = 20, TimeOfPurchase = new DateTime(), CustomerEntityId = 14, StoreEntityId = 1}
+      });
+      builder.Entity<Crust>().HasData(new Crust[]
+      {
+        new Crust() { EntityId = 80, Name = "Thin", Price = 1.00M}
+      });
+      builder.Entity<Crust>().HasData(new Crust[]
+      {
+        new Crust() { EntityId = 81, Name = "Stuffed", Price = 1.00M}
+      });
+      builder.Entity<Crust>().HasData(new Crust[]
+      {
+        new Crust() { EntityId = 82, Name = "Original", Price = 1.00M}
       });
     }
   }

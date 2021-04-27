@@ -16,6 +16,7 @@ namespace PizzaBox.Client
     private static readonly ContextSingleton _contextSingleton = ContextSingleton.Instance;
     private static readonly CustomerSingleton _customerSingleton = CustomerSingleton.Instance;
     private static readonly SizeSingleton _sizeSingleton = SizeSingleton.Instance(_contextSingleton.Context);
+    private static readonly CrustSingleton _crustSingleton = CrustSingleton.Instance(_contextSingleton.Context);
     private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
     private static readonly Order _orderSingleton = OrderSingleton.Order;
@@ -29,9 +30,9 @@ namespace PizzaBox.Client
 
 
       Console.WriteLine("\n");
-      Console.WriteLine("===========================");
-      Console.WriteLine("--- Welcome to PizzaBox ---");
-      Console.WriteLine("===========================");
+      Console.WriteLine("===================================");
+      Console.WriteLine("------- Welcome to PizzaBox -------");
+      Console.WriteLine("===================================");
       Console.WriteLine("\n");
       Console.WriteLine("Let's get your order started");
       Console.WriteLine("\n");
@@ -192,15 +193,14 @@ namespace PizzaBox.Client
     {
       string input = System.Console.ReadLine();
       int index = int.Parse(input);
-      string crustName = Crust.crustsOptions[index - 1];
-      Crust crust = new Crust(crustName);
+      Crust crust = _crustSingleton.Crusts[index - 1];
       customPizza.Crust = crust;
       return customPizza;
     }
 
     private static void PrintCrusts()
     {
-      InterfaceSingleton.printList(Crust.crustsOptions, "Please select your crust");
+      InterfaceSingleton.printList(_crustSingleton.Crusts, "Please select your crust");
     }
 
     public static bool PlaceOrder()
