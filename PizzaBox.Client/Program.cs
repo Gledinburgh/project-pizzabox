@@ -16,6 +16,7 @@ namespace PizzaBox.Client
     private static readonly ContextSingleton _contextSingleton = ContextSingleton.Instance;
     private static readonly CustomerSingleton _customerSingleton = CustomerSingleton.Instance;
     private static readonly SizeSingleton _sizeSingleton = SizeSingleton.Instance(_contextSingleton.Context);
+    private static readonly ToppingSingleton _toppingSingleton = ToppingSingleton.Instance(_contextSingleton.Context);
     private static readonly CrustSingleton _crustSingleton = CrustSingleton.Instance(_contextSingleton.Context);
     private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance(_contextSingleton.Context);
@@ -116,7 +117,7 @@ namespace PizzaBox.Client
 
     private static void PrintToppings()
     {
-      InterfaceSingleton.printList(Topping.toppings, "Please select your toppings");
+      InterfaceSingleton.printList(_toppingSingleton.Toppings, "Please select your toppings");
     }
     private static APizza SelectPizza()
     {
@@ -171,12 +172,12 @@ namespace PizzaBox.Client
       var index = Console.ReadLine();
       var valid = int.TryParse(index, out int input);
 
-      customPizza.Toppings.Add(new Topping(Topping.toppings[int.Parse(index) - 1]));
+      customPizza.Toppings.Add(_toppingSingleton.Toppings[int.Parse(index) - 1]);
       System.Console.WriteLine(input);
       if (customPizza.Toppings.Count > 4)
       {
         System.Console.WriteLine("\n");
-        InterfaceSingleton.printList(customPizza.Toppings, "Here are your Selected Toppings");
+        InterfaceSingleton.printList(customPizza.Toppings, "Here are your Pizzas Toppings");
         return customPizza;
       }
       System.Console.WriteLine("add another? (Y/N)");

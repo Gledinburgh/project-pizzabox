@@ -96,6 +96,22 @@ namespace PizzaBox.Storing
       {
         new Crust() { EntityId = 4, Name = "Neapolitan", Price = 1.00M}
       });
+      builder.Entity<Size>().HasData(new Size[]
+      {
+        new Size("Small") { EntityId = 1}
+      });
+      builder.Entity<Size>().HasData(new Size[]
+      {
+        new Size("Medium") { EntityId = 2}
+      });
+      builder.Entity<Size>().HasData(new Size[]
+      {
+        new Size("Large") { EntityId = 3}
+      });
+      builder.Entity<Size>().HasData(new Size[]
+      {
+        new Size("Eating Challange(XXXL)") { EntityId = 4}
+      });
       builder.Entity<Topping>().HasData(new Topping[]
       {
         new Topping("peppers") {EntityId = 1},

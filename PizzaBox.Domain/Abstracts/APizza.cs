@@ -26,19 +26,19 @@ namespace PizzaBox.Domain.Abstracts
     /// </summary>
     protected APizza()
     {
-      // Factory();
+      Factory();
     }
 
     /// <summary>
     ///
     /// </summary>
-    // protected virtual void Factory()
-    // {
-    //   AddName();
-    //   AddCrust();
-    //   AddSize();
-    //   AddToppings();
-    // }
+    protected virtual void Factory()
+    {
+      AddName();
+      AddCrust();
+      AddSize();
+      AddToppings();
+    }
 
     /// <summary>
     ///

@@ -25,12 +25,7 @@ namespace PizzaBox.Client.Singletons
     private SizeSingleton(PizzaBoxContext context)
     {
       _context = context;
-      Sizes = new List<Size>
-      {
-        _context.Sizes.FirstOrDefault(s => s.Name == "Small"),
-        _context.Sizes.FirstOrDefault(s => s.Name == "Medium"),
-        _context.Sizes.FirstOrDefault(s => s.Name == "Large"),
-      };
+      Sizes = _context.Sizes.ToList();
     }
 
 
