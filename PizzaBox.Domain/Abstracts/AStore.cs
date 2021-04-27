@@ -16,10 +16,6 @@ namespace PizzaBox.Domain.Abstracts
     public string Name { get; set; }
     public List<Order> Orders { get; set; }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
     public override string ToString()
     {
       return Name;

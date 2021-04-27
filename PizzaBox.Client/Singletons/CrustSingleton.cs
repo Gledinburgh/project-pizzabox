@@ -25,8 +25,6 @@ namespace PizzaBox.Client.Singletons
 
       Crusts = new List<Crust>
       {
-        // _context.Sizes.FirstOrDefault(s => s.Name == "Small"),
-
         _context.Crust.FirstOrDefault(c => c.Name == "Thin"),
         _context.Crust.FirstOrDefault(c => c.Name == "Stuffed"),
         _context.Crust.FirstOrDefault(c => c.Name == "Original"),

@@ -18,7 +18,7 @@ namespace PizzaBox.Storing
     public DbSet<AStore> Stores { get; set; }
     public DbSet<APizza> Pizzas { get; set; }
     public DbSet<Customer> Customers { get; set; }
-
+    public DbSet<Topping> Toppings { get; set; }
     public DbSet<Crust> Crust { get; set; }
     public DbSet<Size> Sizes { get; set; }
     //dependency injection
@@ -60,6 +60,16 @@ namespace PizzaBox.Storing
 
     private void OnDataSeeding(ModelBuilder builder)
     {
+
+      // builder.Entity<MeatPizza>().HasData(new MeatPizza[]
+      // {
+      //   new MeatPizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 2}
+      // });
+      // builder.Entity<VeggiePizza>().HasData(new VeggiePizza[]
+      // {
+      //   new VeggiePizza() { EntityId = 2}
+      // });
+
       builder.Entity<ChicagoStore>().HasData(new ChicagoStore[]
       {
         new ChicagoStore() { EntityId = 1, Name = "Chitown Main Street"}
@@ -69,25 +79,42 @@ namespace PizzaBox.Storing
       {
         new NewYorkStore() { EntityId = 2, Name = "BigApple"}
       });
-      builder.Entity<Customer>().HasData(new Customer[]
+
+      builder.Entity<Crust>().HasData(new Crust[]
+{
+        new Crust() { EntityId = 1, Name = "Thin", Price = 1.00M}
+});
+      builder.Entity<Crust>().HasData(new Crust[]
       {
-        new Customer() { EntityId = 1, Name = "Mac"}
-      });
-      builder.Entity<Order>().HasData(new Order[]
-      {
-        new Order() { EntityId = 20, TimeOfPurchase = new DateTime(), CustomerEntityId = 14, StoreEntityId = 1}
+        new Crust() { EntityId = 2, Name = "Stuffed", Price = 1.00M}
       });
       builder.Entity<Crust>().HasData(new Crust[]
       {
-        new Crust() { EntityId = 80, Name = "Thin", Price = 1.00M}
+        new Crust() { EntityId = 3, Name = "Original", Price = 1.00M}
       });
       builder.Entity<Crust>().HasData(new Crust[]
       {
-        new Crust() { EntityId = 81, Name = "Stuffed", Price = 1.00M}
+        new Crust() { EntityId = 4, Name = "Neapolitan", Price = 1.00M}
       });
-      builder.Entity<Crust>().HasData(new Crust[]
+      builder.Entity<Topping>().HasData(new Topping[]
       {
-        new Crust() { EntityId = 82, Name = "Original", Price = 1.00M}
+        new Topping("peppers") {EntityId = 1},
+      });
+      builder.Entity<Topping>().HasData(new Topping[]
+      {
+        new Topping("onions")  {EntityId = 2},
+      });
+      builder.Entity<Topping>().HasData(new Topping[]
+      {
+        new Topping("olives")  {EntityId = 3},
+      });
+      builder.Entity<Topping>().HasData(new Topping[]
+      {
+        new Topping("Mozzarella")  {EntityId = 4},
+      });
+      builder.Entity<Topping>().HasData(new Topping[]
+      {
+        new Topping("Marinara")  {EntityId = 5},
       });
     }
   }

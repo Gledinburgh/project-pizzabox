@@ -20,9 +20,8 @@ namespace PizzaBox.Client.Singletons
 
 
     public List<AStore> Stores { get; }
-    public static StoreSingleton Instance
+    public static StoreSingleton Instance(PizzaBoxContext context)
     {
-      get
       {
         if (_instance == null)
         {

@@ -18,7 +18,7 @@ namespace PizzaBox.Client
     private static readonly SizeSingleton _sizeSingleton = SizeSingleton.Instance(_contextSingleton.Context);
     private static readonly CrustSingleton _crustSingleton = CrustSingleton.Instance(_contextSingleton.Context);
     private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
-    private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
+    private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance(_contextSingleton.Context);
     private static readonly Order _orderSingleton = OrderSingleton.Order;
     private static readonly InterfaceSingleton _interfaceSingleton = InterfaceSingleton.Instance;
     private static void Main()
