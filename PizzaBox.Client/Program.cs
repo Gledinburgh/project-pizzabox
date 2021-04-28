@@ -242,7 +242,7 @@ namespace PizzaBox.Client
         DateTime currentTime = DateTime.Now;
         int timeElapsed = currentTime.Subtract(timeOfPurchase).Hours;
 
-        if (timeElapsed <= 2)
+        if (timeElapsed < 2)
         {
 
           System.Console.WriteLine("\nHours elapsed since last order: " + timeElapsed);
