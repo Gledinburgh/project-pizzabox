@@ -37,6 +37,7 @@ namespace PizzaBox.Client
       Console.WriteLine("\n");
       Console.WriteLine("Let's get your order started");
       Console.WriteLine("\n");
+
       Order order = CreateNewOrder();
       Boolean openMenue = true;
       while (openMenue)
@@ -48,6 +49,7 @@ namespace PizzaBox.Client
     private static Order CreateNewOrder()
     {
       OrderSingleton.CreateNewOrder();
+      _orderSingleton.Pizzas = new List<APizza>();
       _orderSingleton.Customer = SelectCustomer();
       PrintStoreList();
       _orderSingleton.Store = SelectStore();
@@ -57,7 +59,7 @@ namespace PizzaBox.Client
     }
     private static Customer SelectCustomer()
     {
-      System.Console.WriteLine("First, What is your name?");
+      System.Console.WriteLine("\nFirst, What is your name?");
       string input = System.Console.ReadLine();
       Customer customer = _customerSingleton.FetchCustomer(input);
       System.Console.WriteLine("\nIt's Good to see you, " + customer.Name);
@@ -81,7 +83,8 @@ namespace PizzaBox.Client
       IEnumerable<Order> orders = _customerSingleton.FetchCustomerOrders(_orderSingleton.Customer);
       foreach (Order o in orders)
       {
-        InterfaceSingleton.printList(o.Pizzas, o.TimeOfPurchase.ToString("MMMM dd, yyyy"));
+        InterfaceSingleton.printList(o.Pizzas, $"{o.TimeOfPurchase.ToString("MMMM dd, yyyy")} || Store: {o.Store.Name}");
+        System.Console.WriteLine("Total: $" + o.TotalCost);
       }
     }
     private static void removePizza()
@@ -99,7 +102,7 @@ namespace PizzaBox.Client
     {
       InterfaceSingleton.printList(_orderSingleton.Pizzas, "Your order so far");
       System.Console.WriteLine("Total: $" + _orderSingleton.TotalCost);
-      System.Console.WriteLine("Store:" + _orderSingleton.Store.Name + " Customer:" + _orderSingleton.Customer.Name + " Time:" + _orderSingleton.TimeStamp.ToString("hh:mm tt"));
+      System.Console.WriteLine("Store:" + _orderSingleton.Store.Name + " || Customer:" + _orderSingleton.Customer.Name + " || Time:" + _orderSingleton.TimeStamp.ToString("hh:mm tt"));
     }
     private static void PrintPizzaList()
     {
@@ -208,17 +211,19 @@ namespace PizzaBox.Client
     {
       if (ValidateOrderTime() == false)
       {
-        System.Console.WriteLine("A new order can not be placed within 2 hours of last order");
+        System.Console.WriteLine("** ATTENTION **");
+        System.Console.WriteLine("A new order can not be placed within 2 hours of your previous order");
         return true;
       }
       else if (_orderSingleton.TotalCost <= 250 && _orderSingleton.Pizzas.Count <= 50)
       {
         _storeSingleton.AddOrder(_orderSingleton.Store, _orderSingleton);
-        System.Console.WriteLine("Thankyou " + _orderSingleton.Customer.Name + "! Your order has been placed.");
+        System.Console.WriteLine("\nThankyou " + _orderSingleton.Customer.Name + "! Your order has been placed.");
         return false;
       }
       else
       {
+        System.Console.WriteLine("\n** ATTENTION **");
         System.Console.WriteLine("Your order Exceeds order limit of $250 or the maximum of 50 pizzas, please remove Items before subbmitting your order");
         return true;
       }

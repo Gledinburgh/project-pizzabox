@@ -70,7 +70,7 @@ namespace PizzaBox.Domain.Abstracts
         stringBuilder.Append($"{item}{separator}");
       }
 
-      return $"{Name} - Crust: {Crust} - Size: {Size} - Toppings: {stringBuilder.ToString().TrimEnd(separator.ToCharArray())} Price: ${PizzaPrice()}";
+      return $"{Name} \n\t Crust: {Crust} \n\t Size: {Size} \n\t Toppings: {stringBuilder.ToString().TrimEnd(separator.ToCharArray())} \n\t Price: ${PizzaPrice()}\n";
     }
     public decimal PizzaPrice()
     {

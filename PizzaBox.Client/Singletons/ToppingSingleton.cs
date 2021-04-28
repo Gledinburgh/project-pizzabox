@@ -25,7 +25,16 @@ namespace PizzaBox.Client.Singletons
     private ToppingSingleton(PizzaBoxContext context)
     {
       _context = context;
-      Toppings = _context.Toppings.ToList();
+      Toppings = new List<Topping>
+      {
+        _context.Toppings.FirstOrDefault(t => t.Name == "peppers"),
+        _context.Toppings.FirstOrDefault(t => t.Name == "onions"),
+        _context.Toppings.FirstOrDefault(t => t.Name == "olives"),
+        _context.Toppings.FirstOrDefault(t => t.Name == "Mozzarella"),
+        _context.Toppings.FirstOrDefault(t => t.Name == "Marinara"),
+        _context.Toppings.FirstOrDefault(t => t.Name == "Parmigiano"),
+        _context.Toppings.FirstOrDefault(t => t.Name == "Margherita")
+      };
     }
   }
 }
